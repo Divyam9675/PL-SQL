@@ -1,0 +1,58 @@
+Select * from CUSTOM;  
+
++----+----------+-----+-----------+----------+ 
+| ID | NAME     | AGE | ADDRESS   | SALARY   | 
++----+----------+-----+-----------+----------+ 
+|  1 | Ramesh   |  32 | Ahmedabad |  2000.00 | 
+|  2 | Khilan   |  25 | Delhi     |  1500.00 | 
+|  3 | kaushik  |  23 | Kota      |  2000.00 | 
+|  4 | Chaitali |  25 | Mumbai    |  6500.00 | 
+|  5 | Hardik   |  27 | Bhopal    |  8500.00 | 
+|  6 | Komal    |  22 | MP        |  4500.00 | 
++----+----------+-----+-----------+----------+
+
+
+
+Declare
+  cmt number(3);
+    begin
+      update CUSTOM set salary = salary + 500 where salary = 2000;
+    cmt := sql%RowCount;
+    dbms_output.put_line(cmt || 'row updated');
+   end;
+/
+
+2row updated
+
+1 row(s) updated.
+
+0.02 seconds
+
+
+
+
+
+
+Declare
+  cmt number(2);
+   begin
+    update CUSTOM set salary = salary - 500;
+     if sql%notfound then
+       dbms_output.put_line('Data not Found');
+    elsif sql%found then 
+      cmt := sql%rowcount;
+    dbms_output.put_line(cmt || ' rows selected');
+
+    end if;
+  end;
+/
+
+
+5 rows selected
+
+1 row(s) updated.
+
+0.03 seconds
+       
+
+  
