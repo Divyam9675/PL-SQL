@@ -1,0 +1,24 @@
+DECLARE 
+   name varchar2(20); 
+   company varchar2(30); 
+   introduction clob; 
+   choice char(1); 
+BEGIN 
+   name := 'Divyam Gupta'; 
+   company := 'KloudOne'; 
+   introduction := ' Hello! I''m Divyam from KloudOne.'; 
+   choice := 'y'; 
+   IF choice = 'y' THEN 
+      dbms_output.put_line(name); 
+      dbms_output.put_line(company); 
+      dbms_output.put_line(introduction); 
+   END IF; 
+END; 
+/
+
+Divyam Gupta 
+KloudOne
+Hello! I'm Divyam from KloudOne.  
+
+PL/SQL procedure successfully completed
+
