@@ -1,0 +1,40 @@
+Select * from CUSTOM;  
+
++----+----------+-----+-----------+----------+ 
+| ID | NAME     | AGE | ADDRESS   | SALARY   | 
++----+----------+-----+-----------+----------+ 
+|  1 | Ramesh   |  32 | Ahmedabad |  2000.00 | 
+|  2 | Khilan   |  25 | Delhi     |  1500.00 | 
+|  3 | kaushik  |  23 | Kota      |  2000.00 | 
+|  4 | Chaitali |  25 | Mumbai    |  6500.00 | 
+|  5 | Hardik   |  27 | Bhopal    |  8500.00 |  
++----+----------+-----+-----------+----------+
+
+
+
+Declare
+ emp_id CUSTOM.ID%type;
+ emp_name CUSTOM.NAME%type;
+   cursor emp_cursor is
+      select ID, NAME
+        from CUSTOM;
+
+begin 
+    open emp_cursor;
+    loop 
+       fetch emp_cursor into emp_id, emp_name;
+       exit when emp_cursor%rowcount > 3 or emp_cursor%notfound;
+         dbms_output.put_line(emp_id || ' : ' || emp_name);
+        end loop;
+    close emp_cursor;
+end;
+/
+
+
+5 : Hardik
+1 : Ramesh
+2 : Khilan
+
+Statement processed.
+
+0.05 seconds
