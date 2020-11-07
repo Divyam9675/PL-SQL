@@ -1,0 +1,51 @@
+select *from custom;
+
+ID	NAME	AGE	ADDRESS	  SALARY
+5	Hardik	27	Bhopal	  8000
+1	Ramesh	32	Ahmedabad 2000
+2	Khilan	25	Delhi	  1000
+3	kaushik	23	Kota	  2000
+4	Chaital 25	Mumbai	  6000
+
+
+5 rows returned in 0.06 seconds	 
+
+
+1) Parametrized cursor
+
+
+Declare
+  emp_Age custom.Age%type;
+  emp_Address custom.Address%type;
+   cursor emp_cursor(emp_id number) is
+     select Age, Address 
+      from custom 
+       where emp_id = id;
+    Begin
+     open emp_cursor(5);
+      loop
+       fetch emp_cursor into emp_Age, emp_Address;
+        exit when emp_cursor%rowcount >1  or emp_cursor%notfound;
+         dbms_output.put_line(emp_Age || ' : ' ||emp_Address);
+        end loop;
+       close emp_cursor;
+       dbms_output.put_line('--------------------------');
+       open emp_cursor(3);
+       loop
+        fetch emp_cursor into emp_Age, emp_Address;
+         exit when emp_cursor%rowcount >1 or emp_cursor%notfound;
+        dbms_output.put_line(emp_Age || ' : ' || emp_Address);
+        end loop;
+        close emp_cursor;
+    end;
+    /
+ 
+       
+
+27 : Bhopal                   
+--------------------------
+23 : Kota                     
+
+Statement processed.
+
+0.06 seconds
